@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ハマネコ会議 — ヨコハマのことを、ネコになって話す</title>
+<meta name="description" content="4つの質問に答えるとネコになれます。そのまま、横浜のまちのことを370万人と話せる場所。市民がつくった非公式アプリです。">
+<meta name="theme-color" content="#e7e9e3">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="ハマネコ会議">
+<meta property="og:description" content="ネコになって、ヨコハマのことを話す場所。">
+<meta property="og:locale" content="ja_JP">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/style.css">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath d='M12 17 9 5 21 11z' fill='%23145364'/%3E%3Cpath d='M38 17 41 5 29 11z' fill='%23145364'/%3E%3Cpath d='M25 8c11.5 0 17 8 17 18s-7.5 17-17 17S8 36 8 26 13.5 8 25 8z' fill='%23145364'/%3E%3Ccircle cx='19' cy='26' r='3' fill='%23eeb63c'/%3E%3Ccircle cx='31' cy='26' r='3' fill='%23eeb63c'/%3E%3C/svg%3E">
+
+<!-- みんなと同じ板につなぐときだけ、config.js を置いてください（README参照） -->
+<script>window.HAMANEKO_CONFIG = {};</script>
+<script src="./config.js" onerror="void 0"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="shell">
+    <a class="mark" href="./">
+      <svg width="26" height="26" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M9 16c0-3 2-5 5-5h12c3 0 5 2 5 5v3H9z" fill="var(--umi)"/>
+        <circle cx="12" cy="9" r="3.4" fill="var(--umi)"/>
+        <circle cx="20" cy="7" r="3.4" fill="var(--umi)"/>
+        <circle cx="28" cy="9" r="3.4" fill="var(--umi)"/>
+        <path d="M4 27q6-5 12 0t12 0 8-3" fill="none" stroke="var(--hinata)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M4 34q6-5 12 0t12 0 8-3" fill="none" stroke="var(--hinata)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+      </svg>
+      <span><b>ハマネコ会議</b> <small>非公式</small></span>
+    </a>
+    <div class="topbar-right">
+      <div class="whoami" id="whoami"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="shell">
+      <div>
+        <h1>ヨコハマには <span class="pop" id="pop">370万</span> 人と、
+          それよりたくさんのネコがいる。</h1>
+        <p>今日はネコになって、坂のこと、バスのこと、こんな市長がいいなという話を、
+          どこかの区の知らないネコとしてみてください。</p>
+        <div class="hero-do">
+          <button class="btn" type="button" id="hero-cta" data-go="#ask-band">ネコになる</button>
+          <small id="hero-hint">質問は4つ。30秒くらいです。</small>
+        </div>
+      </div>
+      <div id="scene"></div>
+    </div>
+  </section>
+
+  <section class="band" id="tally-band">
+    <div class="shell">
+      <div class="band-head">
+        <h2>いま、ネコたちが考えていること</h2>
+        <span id="tally-n"></span>
+      </div>
+      <div class="tally-grid" id="tally"></div>
+    </div>
+  </section>
+
+  <section class="ask-wrap" id="ask-band">
+    <div class="shell">
+      <div class="ask" id="ask"></div>
+    </div>
+  </section>
+
+  <section class="band" id="board-band">
+    <div class="shell">
+      <div class="band-head">
+        <h2>はなしのタネ</h2>
+        <span>3つの板があります</span>
+      </div>
+      <div class="topics" id="topics" role="tablist"></div>
+      <p class="topic-lead" id="topic-lead"></p>
+      <div id="compose-wrap"></div>
+      <ul class="posts" id="posts"></ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <p class="disclaim">これは横浜市とは関係のない、市民がつくった非公式のアプリです。
+      市の見解でも、正式な意見募集でもありません。実際に届けたい話は、区役所や市の意見受付にも出してください。</p>
+    <p id="mode"></p>
+    <p>MIT License ・ ソースは GitHub にあります。質問の文も、話題も、自由に書きかえて、
+      あなたのまちの会議にしてください。</p>
+  </div>
+</footer>
+
+<script type="module" src="./assets/app.js"></script>
+</body>
+</html>

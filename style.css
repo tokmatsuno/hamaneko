@@ -1,0 +1,295 @@
+/* ハマネコ会議
+   色は 山手の漆喰壁・港の水・日なた・赤レンガ から取っています。 */
+
+:root {
+  --kabe:   #e7e9e3;  /* 漆喰の壁。地の色 */
+  --shiro:  #fbfbf8;  /* 紙。前に出る面 */
+  --sumi:   #1f262a;  /* 墨。文字 */
+  --usu:    #5c666b;  /* うすい文字 */
+  --umi:    #145364;  /* 港の水。主役の色 */
+  --hinata: #eeb63c;  /* 日なた。ここだけ強い */
+  --renga:  #a04e3d;  /* 赤レンガ。しるし */
+  --nezumi: #c6cac2;  /* 罫 */
+
+  --r-s: 4px;
+  --r-m: 10px;
+  --r-pill: 999px;
+
+  --gut: clamp(1.15rem, 4vw, 2.5rem);
+  --serif-ja: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+  --sans-ja: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--kabe);
+  color: var(--sumi);
+  font-family: var(--sans-ja);
+  font-size: 16px;
+  line-height: 1.9;
+  font-feature-settings: "palt" 1;
+}
+
+h1, h2, h3, .display { font-family: var(--serif-ja); font-weight: 700; line-height: 1.34; margin: 0; }
+
+a { color: var(--umi); text-underline-offset: 3px; }
+
+:focus-visible {
+  outline: 3px solid var(--umi);
+  outline-offset: 2px;
+  border-radius: var(--r-s);
+}
+
+.shell { width: 100%; max-width: 62rem; margin: 0 auto; padding: 0 var(--gut); }
+
+.prose { max-width: 32em; }
+
+.hide { display: none !important; }
+
+.sr {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ---------- 上の帯 ---------- */
+
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--kabe) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--nezumi);
+}
+.topbar > .shell {
+  display: flex; align-items: center; gap: .8rem;
+  min-height: 58px;
+}
+.mark { display: flex; align-items: center; gap: .5rem; text-decoration: none; color: inherit; }
+.mark svg { display: block; }
+.mark b { font-family: var(--serif-ja); font-size: 1.06rem; letter-spacing: .02em; }
+.mark small { color: var(--usu); font-size: .72rem; }
+.topbar-right { margin-left: auto; display: flex; align-items: center; gap: .6rem; }
+
+.whoami { display: flex; align-items: center; gap: .5rem; font-size: .82rem; color: var(--usu); }
+.whoami svg { border-radius: var(--r-pill); background: var(--shiro); }
+.whoami b { color: var(--sumi); font-weight: 500; }
+
+/* ---------- ボタン ---------- */
+
+.btn {
+  font: inherit; font-family: var(--serif-ja); font-weight: 700;
+  border: 1px solid var(--sumi);
+  background: var(--hinata); color: var(--sumi);
+  padding: .55rem 1.25rem; border-radius: var(--r-pill);
+  cursor: pointer; line-height: 1.5;
+  box-shadow: 2px 2px 0 var(--sumi);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn:hover { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--sumi); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--sumi); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; box-shadow: 2px 2px 0 var(--sumi); transform: none; }
+
+.btn-quiet {
+  background: transparent; box-shadow: none; border-color: var(--nezumi);
+  font-family: var(--sans-ja); font-weight: 500; color: var(--usu);
+  padding: .35rem .85rem; font-size: .84rem;
+}
+.btn-quiet:hover { transform: none; box-shadow: none; border-color: var(--umi); color: var(--umi); }
+.btn-plain {
+  background: none; border: 0; box-shadow: none; padding: .2rem .1rem;
+  font-family: var(--sans-ja); font-weight: 500; font-size: .82rem;
+  color: var(--usu); cursor: pointer;
+}
+.btn-plain:hover { transform: none; box-shadow: none; color: var(--umi); text-decoration: underline; }
+
+/* ---------- 表紙 ---------- */
+
+.hero { padding: clamp(2rem, 6vw, 4.5rem) 0 clamp(1.5rem, 4vw, 3rem); }
+.hero > .shell {
+  display: grid; gap: clamp(1.5rem, 4vw, 3rem);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+}
+@media (min-width: 56rem) {
+  .hero > .shell { grid-template-columns: 1.05fr 1fr; }
+}
+
+.hero h1 {
+  font-size: clamp(1.85rem, 5.6vw, 3.1rem);
+  letter-spacing: .005em;
+  text-wrap: balance;
+}
+.hero h1 .pop {
+  color: var(--umi);
+  border-bottom: .28em solid var(--hinata);
+  box-decoration-break: clone;
+  padding-bottom: .02em;
+}
+.hero p { max-width: 26em; margin: 1.1rem 0 0; color: var(--usu); }
+.hero-do { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem; margin-top: 1.6rem; }
+.hero-do small { color: var(--usu); font-size: .82rem; }
+
+.scene { width: 100%; height: auto; display: block; }
+.hero-tail { transform-box: fill-box; transform-origin: 8% 88%; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-tail { animation: tail 5.5s ease-in-out .8s 2; }
+}
+@keyframes tail {
+  0%, 62%, 100% { transform: rotate(0deg); }
+  70% { transform: rotate(-9deg); }
+  78% { transform: rotate(6deg); }
+  86% { transform: rotate(-3deg); }
+}
+
+/* ---------- 集計 ---------- */
+
+.band { border-top: 1px solid var(--nezumi); padding: clamp(2rem, 5vw, 3.4rem) 0; }
+.band-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem 1rem; margin-bottom: 1.6rem; }
+.band-head h2 { font-size: clamp(1.25rem, 3vw, 1.6rem); }
+.band-head span { color: var(--usu); font-size: .85rem; }
+
+.tally-grid { display: grid; gap: 1.8rem 2.6rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 46rem) { .tally-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.tally h3 { font-size: 1rem; margin-bottom: .7rem; }
+.tally ol { list-style: none; margin: 0; padding: 0; }
+.tally li { display: grid; grid-template-columns: 1fr auto; gap: 0 .8rem; padding: .3rem 0; align-items: baseline; }
+.tally .lab { font-size: .9rem; line-height: 1.6; }
+.tally .num { font-size: .82rem; color: var(--usu); font-variant-numeric: tabular-nums; }
+.tally .bar { grid-column: 1 / -1; height: 7px; background: color-mix(in srgb, var(--nezumi) 60%, transparent); border-radius: var(--r-pill); overflow: hidden; }
+.tally .bar i { display: block; height: 100%; background: var(--umi); border-radius: var(--r-pill); }
+.tally li.top .bar i { background: var(--renga); }
+
+/* ---------- 質問 ---------- */
+
+.ask-wrap { border-top: 1px solid var(--nezumi); padding: clamp(2rem, 5vw, 3.4rem) 0 clamp(3rem, 7vw, 5rem); }
+.ask {
+  background: var(--shiro);
+  border: 1px solid var(--sumi);
+  border-radius: var(--r-m);
+  padding: clamp(1.3rem, 4vw, 2.4rem);
+  max-width: 42rem;
+}
+.ask-step { display: flex; align-items: center; gap: .5rem; color: var(--usu); font-size: .8rem; margin-bottom: 1rem; }
+.ask-step i { width: 9px; height: 9px; border-radius: var(--r-pill); background: var(--nezumi); display: block; }
+.ask-step i.on { background: var(--umi); }
+.ask-step i.now { background: var(--hinata); border: 1px solid var(--sumi); }
+.ask h2 { font-size: clamp(1.2rem, 3.4vw, 1.55rem); }
+.ask > p { color: var(--usu); font-size: .88rem; margin: .5rem 0 1.4rem; }
+
+.opts { display: grid; gap: .55rem; margin: 0 0 1.6rem; }
+.opt {
+  display: flex; align-items: center; gap: .7rem;
+  border: 1px solid var(--nezumi); border-radius: var(--r-pill);
+  padding: .6rem 1rem; cursor: pointer; background: transparent;
+  font: inherit; font-size: .95rem; text-align: left; color: inherit;
+  transition: border-color .12s ease, background .12s ease;
+}
+.opt:hover { border-color: var(--umi); }
+.opt[aria-pressed="true"] { border-color: var(--sumi); background: var(--hinata); }
+.opt em { font-style: normal; color: var(--usu); font-size: .8rem; margin-left: auto; }
+
+.wards { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.6rem; }
+.wards .opt { padding: .4rem .95rem; font-size: .9rem; }
+
+.ask-foot { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; }
+
+/* できたネコ */
+.done { display: grid; gap: 1.2rem; }
+.done-card { display: flex; align-items: flex-start; gap: 1rem; }
+.done-card svg { flex: 0 0 auto; background: var(--kabe); border-radius: var(--r-pill); }
+.done-card h2 { font-size: clamp(1.3rem, 3.6vw, 1.7rem); }
+.done-card p { margin: .3rem 0 0; }
+.done-card .line { color: var(--umi); font-family: var(--serif-ja); }
+.done-card .body { color: var(--usu); font-size: .9rem; max-width: 30em; }
+.rename { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.rename input {
+  font: inherit; font-size: .95rem; padding: .45rem .8rem;
+  border: 1px solid var(--nezumi); border-radius: var(--r-pill);
+  background: var(--kabe); color: inherit; min-width: 12rem;
+}
+.rules { margin: 0; padding-left: 1.2rem; color: var(--usu); font-size: .85rem; }
+.rules li { padding: .1rem 0; }
+
+/* ---------- 板 ---------- */
+
+.topics { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.4rem; }
+.topic {
+  font: inherit; font-family: var(--serif-ja); font-weight: 700; font-size: .95rem;
+  background: transparent; border: 1px solid var(--nezumi); border-radius: var(--r-pill);
+  padding: .45rem 1.1rem; cursor: pointer; color: var(--usu);
+}
+.topic:hover { border-color: var(--umi); color: var(--umi); }
+.topic[aria-selected="true"] { background: var(--sumi); border-color: var(--sumi); color: var(--kabe); }
+
+.topic-lead { color: var(--usu); font-size: .88rem; margin: 0 0 1.2rem; max-width: 34em; }
+
+.compose { margin-bottom: 2rem; max-width: 40rem; }
+.compose textarea {
+  width: 100%; font: inherit; font-size: .98rem; line-height: 1.8;
+  padding: .85rem 1rem; border: 1px solid var(--nezumi); border-radius: var(--r-m);
+  background: var(--shiro); color: inherit; resize: vertical; min-height: 6.5rem;
+}
+.compose textarea:focus { border-color: var(--umi); }
+.compose-foot { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; margin-top: .7rem; }
+.count { font-size: .8rem; color: var(--usu); font-variant-numeric: tabular-nums; }
+.count.over { color: var(--renga); }
+.note { font-size: .82rem; color: var(--renga); margin: .5rem 0 0; }
+
+.locked {
+  border: 1px dashed var(--nezumi); border-radius: var(--r-m);
+  padding: 1.1rem 1.2rem; max-width: 40rem; margin-bottom: 2rem;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .9rem;
+}
+.locked p { margin: 0; font-size: .9rem; color: var(--usu); }
+
+.posts { list-style: none; margin: 0; padding: 0; }
+.posts > li { border-top: 1px solid var(--nezumi); padding: 1.4rem 0; }
+.posts > li:last-child { border-bottom: 1px solid var(--nezumi); }
+
+.who { display: flex; align-items: center; gap: .6rem; margin-bottom: .5rem; }
+.who svg { background: var(--shiro); border-radius: var(--r-pill); flex: 0 0 auto; }
+.who b { font-family: var(--serif-ja); font-size: .92rem; font-weight: 700; }
+.who span { font-size: .78rem; color: var(--usu); }
+.who time { font-size: .75rem; color: var(--usu); margin-left: auto; }
+
+.said { margin: 0; font-size: 1rem; max-width: 32em; overflow-wrap: anywhere; }
+
+.acts { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .9rem; margin-top: .75rem; }
+.nya {
+  font: inherit; font-size: .84rem; font-weight: 500;
+  border: 1px solid var(--nezumi); border-radius: var(--r-pill);
+  background: transparent; padding: .25rem .8rem; cursor: pointer; color: var(--usu);
+  font-variant-numeric: tabular-nums;
+}
+.nya:hover { border-color: var(--umi); color: var(--umi); }
+.nya[aria-pressed="true"] { background: var(--hinata); border-color: var(--sumi); color: var(--sumi); }
+
+.replies { list-style: none; margin: 1rem 0 0; padding: 0 0 0 1rem; border-left: 2px solid var(--nezumi); }
+.replies li { padding: .55rem 0; }
+.replies .said { font-size: .93rem; }
+
+.reply-box { margin: .9rem 0 0; padding-left: 1rem; border-left: 2px solid var(--nezumi); max-width: 34rem; }
+.reply-box textarea { min-height: 4rem; }
+
+.empty { border: 1px dashed var(--nezumi); border-radius: var(--r-m); padding: 1.6rem; color: var(--usu); font-size: .92rem; }
+.empty b { display: block; font-family: var(--serif-ja); color: var(--sumi); margin-bottom: .3rem; }
+
+/* ---------- 下 ---------- */
+
+.foot { border-top: 1px solid var(--nezumi); padding: 2.4rem 0 3.2rem; color: var(--usu); font-size: .84rem; }
+.foot p { margin: 0 0 .6rem; max-width: 34em; }
+.foot .disclaim { color: var(--sumi); }
+
+/* ---------- 出てくるとき（一度だけ） ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { animation: rise .45s cubic-bezier(.2, .7, .3, 1) both; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
